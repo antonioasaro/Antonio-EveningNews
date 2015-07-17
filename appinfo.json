@@ -4,18 +4,18 @@
         ""
     ],
     "companyName": "antonio_asaro",
-    "longName": "ANTONIO-EVENINGNEWS",
+    "longName": "EveningNews",
     "projectType": "native",
     "resources": {
         "media": []
     },
     "sdkVersion": "3",
-    "shortName": "ANTONIO-EVENINGNEWS",
+    "shortName": "EveningNews",
     "targetPlatforms": [
         "basalt"
     ],
     "uuid": "2cb3f2bc-f51d-4658-bd2e-8b526605f2fd",
-    "versionLabel": "1.1",
+    "versionLabel": "1.11",
     "watchapp": {
         "watchface": false
     }
