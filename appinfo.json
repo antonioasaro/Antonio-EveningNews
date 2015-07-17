@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "antonio_asaro",
+    "longName": "ANTONIO-EVENINGNEWS",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "ANTONIO-EVENINGNEWS",
+    "uuid": "302c0211-ad5a-4fee-9db5-b0c25373e243",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
