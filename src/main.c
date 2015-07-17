@@ -7,9 +7,10 @@ void handle_init(void) {
   my_window = window_create();
   window_stack_push(my_window, true);
 
-  text_layer = text_layer_create(GRect(0, 0, 144, 20));
+  text_layer = text_layer_create(GRect(0, 0, 144, 40));
+  text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
   text_layer_set_text_color(text_layer, GColorBlack);	
-  text_layer_set_text(text_layer, "Subscribing ...");
+  text_layer_set_text(text_layer, "Subscribed!!");
   layer_add_child(window_get_root_layer(my_window), text_layer_get_layer(text_layer));	
 }
 

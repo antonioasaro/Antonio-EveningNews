@@ -11,8 +11,11 @@
     },
     "sdkVersion": "3",
     "shortName": "ANTONIO-EVENINGNEWS",
-    "uuid": "302c0211-ad5a-4fee-9db5-b0c25373e243",
-    "versionLabel": "1.0",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "2cb3f2bc-f51d-4658-bd2e-8b526605f2fd",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": false
     }
