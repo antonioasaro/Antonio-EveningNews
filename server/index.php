@@ -32,10 +32,11 @@ and open the template in the editor.
             }        
 
             //Create and send pin
-            $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'Sample reminder!', null, null, null, PinIcon::NOTIFICATION_FLAG);
             $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, null, null, PinIcon::NEWS_EVENT);
-            $reminder = new PinReminder($reminderlayout, (new DateTime('now')) -> add(new DateInterval('PT10M')));
-            $pin = new Pin('antonio-eveningnews-1', (new DateTime('now')) -> add(new DateInterval('PT5M')), $pinlayout);
+            $pin = new Pin('antonio-eveningnews-1', (new DateTime('now')) -> add(new DateInterval('PT10M')), $pinlayout);
+ 
+            $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'EveningNews reminder!!', null, null, null, PinIcon::NOTIFICATION_FLAG);
+            $reminder = new PinReminder($reminderlayout, (new DateTime('now')) -> add(new DateInterval('PT5M')));
             $pin -> addReminder($reminder);
             
             $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
