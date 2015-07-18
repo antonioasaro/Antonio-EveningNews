@@ -33,16 +33,21 @@ and open the template in the editor.
 
             //Create and send pin
             $timezone = date_default_timezone_get();
-            echo "The current server timezone is: " . $timezone . '<br>';
+            echo "The current server timezone is: " . $timezone . '<br>';          
             
-            $newsTime = new DateTime('now');
-            $newsTime->setTime(18+4, 30, 0);
-            echo $newsTime->format('Y-m-d H:i:s');
-            $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, '@6:30pm', 'body', PinIcon::NEWS_EVENT);
+            $utc = new DateTimeZone('UTC');
+            $amny = new DateTimeZone('America/New_York');
+            
+            $newsTime = new DateTime('now', $amny);
+            $newsTime->setTime(18, 30, 0);
+            $newsTime->setTimeZone($utc);
+            echo $newsTime->format('Y-m-d H:i:s') . '<br>';
+            $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, '@6:30pm ET', 'body', PinIcon::NEWS_EVENT);
             $pin = new Pin('antonio-eveningnews-1', $newsTime, $pinlayout);
   
-            $reminderTime = new DateTime('now');
-            $reminderTime->setTime(18+4, 25, 0);
+            $reminderTime = new DateTime('now', $amny);
+            $reminderTime->setTime(18, 25, 0);
+            $reminderTime->setTimeZone($utc);
             $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'EveningNews reminder!!', null, 'stay tuned ...', null, PinIcon::NOTIFICATION_FLAG);
             $reminder = new PinReminder($reminderlayout, $reminderTime);
             $pin -> addReminder($reminder);
