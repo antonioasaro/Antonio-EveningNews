@@ -32,17 +32,25 @@ and open the template in the editor.
             }        
 
             //Create and send pin
+            $timezone = date_default_timezone_get();
+            echo "The current server timezone is: " . $timezone . '<br>';
+            
+            $newsTime = new DateTime('now');
+            $newsTime->setTime(18+4, 30, 0);
+            echo $newsTime->format('Y-m-d H:i:s');
             $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, '@6:30pm', 'body', PinIcon::NEWS_EVENT);
-            $pin = new Pin('antonio-eveningnews-1', (new DateTime('now')) -> add(new DateInterval('PT10M')), $pinlayout);
+            $pin = new Pin('antonio-eveningnews-1', $newsTime, $pinlayout);
   
-            $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'EveningNews reminder!!', null, null, null, PinIcon::NOTIFICATION_FLAG);
-            $reminder = new PinReminder($reminderlayout, (new DateTime('now')) -> add(new DateInterval('PT5M')));
+            $reminderTime = new DateTime('now');
+            $reminderTime->setTime(18+4, 25, 0);
+            $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'EveningNews reminder!!', null, 'stay tuned ...', null, PinIcon::NOTIFICATION_FLAG);
+            $reminder = new PinReminder($reminderlayout, $reminderTime);
             $pin -> addReminder($reminder);
             
             $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
             $topics = ['all-users'];
             Timeline::pushSharedPin($apiKey, $topics, $pin);
-            
+            echo "<br>Pushed shared pin.<br>";
         ?>
     </body>
 </html>
