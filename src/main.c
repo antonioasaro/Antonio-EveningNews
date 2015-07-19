@@ -19,7 +19,7 @@ void handle_init(void) {
   text_layer_set_font(body_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   text_layer_set_text_alignment(body_text_layer, GTextAlignmentCenter);
   text_layer_set_text_color(body_text_layer, GColorBlack);	
-  text_layer_set_text(body_text_layer, "Timeline pin coming.");
+  text_layer_set_text(body_text_layer, "Timeline pins coming.");
   layer_add_child(window_get_root_layer(my_window), text_layer_get_layer(body_text_layer));	
 }
 
