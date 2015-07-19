@@ -17,7 +17,7 @@ class PinReminder {
     }
 
     function getData() {
-        return array_filter(['layout' => $this -> layout -> getData(), 'time' => $this -> time]);
+        return array_filter(array('layout' => $this -> layout -> getData(), 'time' => $this -> time));
     }
 
 }

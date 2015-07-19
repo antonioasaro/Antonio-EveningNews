@@ -45,7 +45,7 @@ class Pin
     public function getData() {
         $createNotification = $this -> createNotification ? $this -> createNotification -> getData() : null;
         $updateNotification = $this -> updateNotification ? $this -> updateNotification -> getData() : null;
-        return array_filter(['id' => $this -> id, 'time' => $this -> time, 'duration' => $this -> duration,'createNotification' => $createNotification, 'updateNotification' => $updateNotification,'layout' => $this -> layout -> getData(), 'reminders' => $this -> reminders, 'actions' => $this -> actions ]);
+        return array_filter(array('id' => $this -> id, 'time' => $this -> time, 'duration' => $this -> duration,'createNotification' => $createNotification, 'updateNotification' => $updateNotification,'layout' => $this -> layout -> getData(), 'reminders' => $this -> reminders, 'actions' => $this -> actions ));
     }
 
     public function addReminder(PinReminder $reminder) {

@@ -20,7 +20,7 @@ class PinAction {
     }
 
     function getData() {
-        return array_filter([ 'type' => $this -> type, 'title' => $this -> title, 'launchCode' => $this -> launchcode]);
+        return array_filter(array('type' => $this -> type, 'title' => $this -> title, 'launchCode' => $this -> launchcode));
     }
 
 }

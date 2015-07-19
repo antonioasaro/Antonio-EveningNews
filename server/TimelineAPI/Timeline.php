@@ -15,13 +15,13 @@ class Timeline
     private static $SHARED_PIN_API = '/v1/shared/pins/';
 
 
-    private static $ERROR_CODES = [
+    private static $ERROR_CODES = array(
         200 => 'Success!',
         400 => 'The pin object submitted was invalid.',
         403 => 'The API key submitted was invalid.',
         410 => 'The user token submitted was invalid or does not exist.',
         429 => 'Server is sending updates too quickly.',
-        503 => 'Could not save pin due to a temporary server error.'];
+        503 => 'Could not save pin due to a temporary server error.');
 
 
     static function pushPin($userToken, Pin $pin)
@@ -120,7 +120,7 @@ class Timeline
         ));
         $response = curl_exec($ch);
 
-        $RESPONSE_CODE = curl_getinfo($ch)['http_code'];
+        $RESPONSE_CODE = curl_getinfo($ch); $RESPONSE_CODE = $RESPONSE_CODE['http_code'];
         $RESPONSE_STATUS = ($RESPONSE_CODE != null && array_key_exists($RESPONSE_CODE, self::$ERROR_CODES)) ? self::$ERROR_CODES[$RESPONSE_CODE] : 'Illegal response code.';
 
         curl_close($ch);

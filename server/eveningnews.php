@@ -63,7 +63,7 @@ and open the template in the editor.
             $pin -> addReminder($reminder);
             
             $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
-            $topics = ['all-users'];
+            $topics = array('all-users');
             Timeline::pushSharedPin($apiKey, $topics, $pin);
             echo "<br>Pushed shared pin.<br>";
         ?>
