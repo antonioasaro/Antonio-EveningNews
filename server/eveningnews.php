@@ -19,8 +19,8 @@ and open the template in the editor.
             use TimelineAPI\PinReminder;
             use TimelineAPI\Timeline;
 
-            $update = "create";
-            if (isset($_GET["update"])) $update = $_GET["update"];
+            $mode = "create";
+            if (isset($_GET["mode"])) $mode = $_GET["mode"];
             
             //Process RSS feed
             $url = "https://news.google.com/?output=rss";
@@ -46,13 +46,8 @@ and open the template in the editor.
             $newsTime = new DateTime('now', $amny);
             $newsTime->setTime(18, 30, 0);
             $newsTime->setTimeZone($utc);
-            echo $newsTime->format('Y-m-d H:i:s') . '<br>';
-            if ($update == "create") {
-                $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, 'Top headlines', "Will be posted at ~6:30pm ET", PinIcon::NEWS_EVENT);
-            } else {
-                $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, 'Top headlines', $allTheNews, PinIcon::NEWS_EVENT);            
-            }
-            
+            if ($mode == "create") { $allTheNews = "Will be posted at ~6:30pm ET"; }
+            $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, 'Top headlines', $allTheNews, PinIcon::NEWS_EVENT);            
             $pin = new Pin('antonio-eveningnews-1', $newsTime, $pinlayout);
   
             $reminderTime = new DateTime('now', $amny);
@@ -63,9 +58,14 @@ and open the template in the editor.
             $pin -> addReminder($reminder);
             
             $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
+            //$apiKey = "drekk95x2tufpn3rqluu3rxgmuo2t61k";
             $topics = array('all-users');
             Timeline::pushSharedPin($apiKey, $topics, $pin);
-            echo "<br>Pushed shared pin.<br>";
+            if ($mode == "create") { 
+                echo "Created shared pin for " . $newsTime->format('Y-m-d H:i:s') . " UTC<br>"; 
+            } else { 
+                echo "Updated shared pin.<br>";              
+            }
         ?>
     </body>
 </html>
