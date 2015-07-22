@@ -6,7 +6,7 @@ TextLayer *body_text_layer;
 
 void handle_init(void) {
   my_window = window_create();
-  window_set_background_color(my_window, GColorCyan);  
+  window_set_background_color(my_window, GColorVividCerulean);  
   window_stack_push(my_window, true);
 
   title_text_layer = text_layer_create(GRect(0, 50, 144, 40));
