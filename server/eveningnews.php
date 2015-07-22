@@ -20,13 +20,18 @@ and open the template in the editor.
             use TimelineAPI\Timeline;
 
             $mode = "create";
-            $body = "Will be posted at ~6:30pm ET"; 
-            if (isset($_GET["mode"])) $mode = $_GET["mode"];
+	    if (PHP_SAPI === 'cli') {
+		$mode = $argv[1];
+	    }  else {
+            	if (isset($_GET["mode"])) $mode = $_GET["mode"];
+	    }
             
             $timezone = date_default_timezone_get();
             echo "The current server timezone is: " . $timezone . '<br>';                   
             //Process RSS feed
-            if ($mode != "create") { 
+            if ($mode == "create") { 
+            	$body = "Will be posted at ~6:30pm ET"; 
+	    } else {
             	$url = "https://news.google.com/?output=rss";
             	$xml = simplexml_load_file($url);
             	$search = array('&#39;', '&quot;');
