@@ -25,6 +25,7 @@ and open the template in the editor.
 	    }  else {
             	if (isset($_GET["mode"])) $mode = $_GET["mode"];
 	    }
+	    echo "Mode set to: $mode." . '<br>';
             
             $timezone = date_default_timezone_get();
             echo "The current server timezone is: " . $timezone . '<br>';                   
@@ -65,9 +66,11 @@ and open the template in the editor.
             $pin -> addReminder($reminder);
             
             $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
+	    $userToken = "SBJi6DLASS1gawIXru2tiBqAf8HohY5G";
             //$apiKey = "drekk95x2tufpn3rqluu3rxgmuo2t61k";
             $topics = array('all-users');
-            Timeline::pushSharedPin($apiKey, $topics, $pin);
+            Timeline::pushPin($userToken, $pin);
+            // Timeline::pushSharedPin($apiKey, $topics, $pin);
             if ($mode == "create") { 
                 echo "Created shared pin set for " . $newsTime->format('Y-m-d H:i:s') . " UTC<br>"; 
             } else { 
