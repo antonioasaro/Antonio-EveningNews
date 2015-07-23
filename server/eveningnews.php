@@ -21,7 +21,7 @@ and open the template in the editor.
 
             $mode = "create";
 	    if (PHP_SAPI === 'cli') {
-		$mode = $argv[1];
+		if (isset($argv[1])) $mode = $argv[1];
 	    }  else {
             	if (isset($_GET["mode"])) $mode = $_GET["mode"];
 	    }
