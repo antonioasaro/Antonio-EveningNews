@@ -20,7 +20,7 @@ and open the template in the editor.
             use TimelineAPI\Timeline;
 
             $mode = "create";
-	    if (PHP_SAPI === 'cli') {
+	    if (PHP_SAPI == 'cli') {
 		if (isset($argv[1])) $mode = $argv[1];
 	    }  else {
             	if (isset($_GET["mode"])) $mode = $_GET["mode"];
