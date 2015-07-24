@@ -20,10 +20,10 @@ and open the template in the editor.
             use TimelineAPI\Timeline;
 
             $mode = "create";
-	    if (PHP_SAPI == 'cli') {
-		if (isset($argv[1])) $mode = $argv[1];
-	    }  else {
-            	if (isset($_GET["mode"])) $mode = $_GET["mode"];
+	    if (\PHP_SAPI === 'cli') {
+                if (isset($argv[1])) { $mode = $argv[1]; }
+            } else {
+                if (isset($_GET["mode"])) { $mode = $_GET["mode"]; }
 	    }
 	    echo "Mode set to: $mode." . '<br>';
             
@@ -51,12 +51,15 @@ and open the template in the editor.
             $utc = new DateTimeZone('UTC');
             $amny = new DateTimeZone('America/New_York');
             
-	    $subtitle = date('F j') . " headlines";
+	    $subtitle = date('F jS') . " headlines";
             $newsTime = new DateTime('now', $amny);
             $newsTime->setTime(18, 30, 0);
             $newsTime->setTimeZone($utc);
+            
+            $id = "antonio-eveningnews-" . date('m-d-y'); 
+            echo "Pin id is: $id" . '<br>';
             $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitle, $body, PinIcon::NEWS_EVENT);            
-            $pin = new Pin('antonio-eveningnews-1', $newsTime, $pinlayout);
+            $pin = new Pin($id, $newsTime, $pinlayout);
   
             $reminderTime = new DateTime('now', $amny);
             $reminderTime->setTime(18, 25, 0);
@@ -65,12 +68,14 @@ and open the template in the editor.
             $reminder = new PinReminder($reminderlayout, $reminderTime);
             $pin -> addReminder($reminder);
             
-            $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
 	    $userToken = "SBJi6DLASS1gawIXru2tiBqAf8HohY5G";
+            $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
             //$apiKey = "drekk95x2tufpn3rqluu3rxgmuo2t61k";
             $topics = array('all-users');
-            Timeline::pushPin($userToken, $pin);
-            // Timeline::pushSharedPin($apiKey, $topics, $pin);
+            
+            $status = Timeline::pushPin($userToken, $pin);
+            // $status = Timeline::pushSharedPin($apiKey, $topics, $pin);
+            var_dump($status); echo '<br>';
             if ($mode == "create") { 
                 echo "Created shared pin set for " . $newsTime->format('Y-m-d H:i:s') . " UTC<br>"; 
             } else { 
