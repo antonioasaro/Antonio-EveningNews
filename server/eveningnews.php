@@ -22,8 +22,11 @@ and open the template in the editor.
             $mode = "create";
 	    if (\PHP_SAPI === 'cli') {
                 if (isset($argv[1])) { $mode = $argv[1]; }
+                echo "Cmdline is: "; var_dump($argv); echo '<br>';
+                echo "Run via cmdline interface.<br>";
             } else {
                 if (isset($_GET["mode"])) { $mode = $_GET["mode"]; }
+                echo "Run via web interface.<br>";
 	    }
 	    echo "Mode set to: $mode." . '<br>';
             
@@ -33,17 +36,17 @@ and open the template in the editor.
             if ($mode == "create") { 
             	$body = "Will be posted at ~6:30pm ET"; 
 	    } else {
-            	$url = "https://news.google.com/?output=rss";
+            	$body = "";
+                $url = "https://news.google.com/?output=rss";
             	$xml = simplexml_load_file($url);
             	$search = array('&#39;', '&quot;');
             	$replace = array("'", '"');
 
             	for ($i=1; $i<=5; $i++) {
-                	$description = strip_tags($xml->channel->item[$i]->description, '<br>');
+                	$description = \strip_tags($xml->channel->item[$i]->description, '<br>');
                 	$content = explode("<br>", $description);
                 	$fixed = str_replace($search, $replace, $content[2]);
                 	$body .= "$i: $fixed\n ";
-                	echo "<b>$content[2]</b><br>$content[4]<br><br>"; 
             	}        
 	    }
 
@@ -73,14 +76,15 @@ and open the template in the editor.
             //$apiKey = "drekk95x2tufpn3rqluu3rxgmuo2t61k";
             $topics = array('all-users');
             
-            $status = Timeline::pushPin($userToken, $pin);
-            // $status = Timeline::pushSharedPin($apiKey, $topics, $pin);
-            var_dump($status); echo '<br>';
+            // $status = Timeline::pushPin($userToken, $pin);
+            $status = Timeline::pushSharedPin($apiKey, $topics, $pin);
+            echo "Status is: "; var_dump($status); echo '<br>';
             if ($mode == "create") { 
                 echo "Created shared pin set for " . $newsTime->format('Y-m-d H:i:s') . " UTC<br>"; 
             } else { 
                 echo "Updated shared pin.<br>";              
             }
+            echo "Body set to: $body<br>";
         ?>
     </body>
 </html>
