@@ -59,7 +59,7 @@ and open the template in the editor.
             $newsTime->setTime(18, 30, 0);
             $newsTime->setTimeZone($utc);
             
-            $id = "antonio-eveningnews-" . date('m-d-y'); 
+            $id = "antonio-eveningnews-shared-" . date('m-d-y'); 
             echo "Pin id is: $id" . '<br>';
             $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitle, $body, PinIcon::NEWS_EVENT);            
             $pin = new Pin($id, $newsTime, $pinlayout);
