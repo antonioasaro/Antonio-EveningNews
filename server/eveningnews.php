@@ -51,7 +51,7 @@ and open the template in the editor.
             $utc = new DateTimeZone('UTC');
             $amny = new DateTimeZone('America/New_York');
             
-	    $subtitle = date('m-d') . " headlines";
+	    $subtitle = date('m/d') . " headlines";
             $newsTime = new DateTime('now', $amny);
             $newsTime->setTime(18, 30, 0);
             $newsTime->setTimeZone($utc);
