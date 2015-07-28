@@ -39,8 +39,8 @@ and open the template in the editor.
             	$body = "";
                 $url = "https://news.google.com/?output=rss";
             	$xml = simplexml_load_file($url);
-            	$search = array('&#39;', '&quot;');
-            	$replace = array("'", '"');
+            	$search = array('&#39;', '&quot;', '&amp;');
+            	$replace = array("'", '"', '&');
 
             	for ($i=1; $i<=5; $i++) {
                 	$description = \strip_tags($xml->channel->item[$i]->description, '<br>');
