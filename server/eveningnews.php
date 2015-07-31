@@ -71,9 +71,9 @@ and open the template in the editor.
             $reminder = new PinReminder($reminderlayout, $reminderTime);
             $pin -> addReminder($reminder);
             
-	    $userToken = "SBJi6DLASS1gawIXru2tiBqAf8HohY5G";
-            $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
-            //$apiKey = "drekk95x2tufpn3rqluu3rxgmuo2t61k";
+	    // $userToken = "SBJi6DLASS1gawIXru2tiBqAf8HohY5G";
+            // $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
+            $apiKey = "drekk95x2tufpn3rqluu3rxgmuo2t61k";
             $topics = array('all-users');
             
             // $status = Timeline::pushPin($userToken, $pin);
