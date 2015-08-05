@@ -34,7 +34,7 @@ and open the template in the editor.
             echo "The current server timezone is: " . $timezone . '<br>';                   
             //Process RSS feed
             if ($mode == "create") { 
-            	$body = "Will be posted at ~6:30pm ET"; 
+            	$body = "Will be posted at ~6:30pm ET+PT"; 
 	    } else {
             	$body = "";
                 $url = "https://news.google.com/?output=rss";
