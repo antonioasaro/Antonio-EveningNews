@@ -52,17 +52,21 @@ and open the template in the editor.
 
             //Create and send pin
             $utc = new DateTimeZone('UTC');
-            $amny = new DateTimeZone('America/New_York');
-            
-	    $subtitle = date('m/d') . " headlines";
+            $amny = new DateTimeZone('America/New_York');       
             $newsTime = new DateTime('now', $amny);
             $newsTime->setTime(18, 30, 0);
             $newsTime->setTimeZone($utc);
-            
-            $id = "antonio-eveningnews-shared-" . date('m-d-y'); 
-            echo "Pin id is: $id" . '<br>';
+            $newsTimeTomorrow = clone $newsTime; $newsTimeTomorrow->modify('+1 day');
+            $newsTimeDayAfter = clone $newsTime; $newsTimeDayAfter->modify('+2 day');
+
+            $id = "antonio-eveningnews-shared-" . $newsTime->format('Y-m-d');
+            $idTomorrow = "antonio-eveningnews-shared-" . $newsTimeTomorrow->format('Y-m-d');
+            $idDayAfter = "antonio-eveningnews-shared-" . $newsTimeDayAfter->format('Y-m-d');
+            $subtitle = date('m/d') . " headlines";
             $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitle, $body, PinIcon::NEWS_EVENT);            
             $pin = new Pin($id, $newsTime, $pinlayout);
+            $pinTomorrow = new Pin($idTomorrow, $newsTimeTomorrow, $pinlayout);
+            $pinDayAfter = new Pin($idDayAfter, $newsTimeDayAfter, $pinlayout);
   
             $reminderTime = new DateTime('now', $amny);
             $reminderTime->setTime(18, 25, 0);
@@ -76,11 +80,14 @@ and open the template in the editor.
             $apiKey = "drekk95x2tufpn3rqluu3rxgmuo2t61k";
             $topics = array('all-users');
             
+            echo "Pin id is: $id" . '<br>';          
             // $status = Timeline::pushPin($userToken, $pin);
             $status = Timeline::pushSharedPin($apiKey, $topics, $pin);
             echo "Status is: "; var_dump($status); echo '<br>';
             if ($mode == "create") { 
                 echo "Created shared pin set for " . $newsTime->format('Y-m-d H:i:s') . " UTC<br>"; 
+                Timeline::pushSharedPin($apiKey, $topics, $pinTomorrow);
+                Timeline::pushSharedPin($apiKey, $topics, $pinDayAfter);
             } else { 
                 echo "Updated shared pin.<br>";              
             }
