@@ -77,8 +77,8 @@ and open the template in the editor.
                 $subtitleDayAfter = $newsTimeDayAfter->format('m/d') . " headlines";
                 $pinlayoutTomorrow = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleTomorrow, $body, PinIcon::NEWS_EVENT);            
                 $pinlayoutDayAfter = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleDayAfter, $body, PinIcon::NEWS_EVENT);            
-                $pinTomorrow = new Pin($idTomorrow, $newsTimeTomorrow, $pinlayout);
-                $pinDayAfter = new Pin($idDayAfter, $newsTimeDayAfter, $pinlayout);
+                $pinTomorrow = new Pin($idTomorrow, $newsTimeTomorrow, $pinlayoutTomorrow);
+                $pinDayAfter = new Pin($idDayAfter, $newsTimeDayAfter, $pinlayoutDayAfter);
             }
             
 	    // $userToken = "SBJi6DLASS1gawIXru2tiBqAf8HohY5G";
