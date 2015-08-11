@@ -31,8 +31,17 @@ and open the template in the editor.
 	    echo "Mode set to: $mode." . '<br>';
             
             $timezone = date_default_timezone_get();
-            echo "The current server timezone is: " . $timezone . '<br>';                   
-            //Process RSS feed
+            echo "The current server timezone is: " . $timezone . '<br>';
+
+            //Create and send pin
+            $utc = new DateTimeZone('UTC');
+            $amny = new DateTimeZone('America/New_York');       
+            $newsTime = new DateTime('now', $amny);
+            $newsTime->setTime(18, 30, 0);
+            $newsTime->setTimeZone($utc);
+
+            $id = "antonio-eveningnews-shared-" . $newsTime->format('Y-m-d');
+            $subtitle = $newsTime->format('m/d') . " headlines";
             if ($mode == "create") { 
             	$body = "Posted at ~6:30pm ET & PT"; 
 	    } else {
@@ -49,24 +58,8 @@ and open the template in the editor.
                 	$body .= "$i: $fixed\n ";
             	}        
 	    }
-
-            //Create and send pin
-            $utc = new DateTimeZone('UTC');
-            $amny = new DateTimeZone('America/New_York');       
-            $newsTime = new DateTime('now', $amny);
-            $newsTime->setTime(18, 30, 0);
-            $newsTime->setTimeZone($utc);
-            $newsTimeTomorrow = clone $newsTime; $newsTimeTomorrow->modify('+1 day');
-            $newsTimeDayAfter = clone $newsTime; $newsTimeDayAfter->modify('+2 day');
-
-            $id = "antonio-eveningnews-shared-" . $newsTime->format('Y-m-d');
-            $idTomorrow = "antonio-eveningnews-shared-" . $newsTimeTomorrow->format('Y-m-d');
-            $idDayAfter = "antonio-eveningnews-shared-" . $newsTimeDayAfter->format('Y-m-d');
-            $subtitle = date('m/d') . " headlines";
             $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitle, $body, PinIcon::NEWS_EVENT);            
             $pin = new Pin($id, $newsTime, $pinlayout);
-            $pinTomorrow = new Pin($idTomorrow, $newsTimeTomorrow, $pinlayout);
-            $pinDayAfter = new Pin($idDayAfter, $newsTimeDayAfter, $pinlayout);
   
             $reminderTime = new DateTime('now', $amny);
             $reminderTime->setTime(18, 25, 0);
@@ -74,6 +67,19 @@ and open the template in the editor.
             $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'EveningNews reminder!!', null, null, null, PinIcon::NOTIFICATION_FLAG);
             $reminder = new PinReminder($reminderlayout, $reminderTime);
             $pin -> addReminder($reminder);
+
+            if ($mode == "create") { 
+                $newsTimeTomorrow = clone $newsTime; $newsTimeTomorrow->modify('+1 day');
+                $newsTimeDayAfter = clone $newsTime; $newsTimeDayAfter->modify('+2 day');
+                $idTomorrow = "antonio-eveningnews-shared-" . $newsTimeTomorrow->format('Y-m-d');
+                $idDayAfter = "antonio-eveningnews-shared-" . $newsTimeDayAfter->format('Y-m-d');
+                $subtitleTomorrow = $newsTimeTomorrow->format('m/d') . " headlines";
+                $subtitleDayAfter = $newsTimeDayAfter->format('m/d') . " headlines";
+                $pinlayoutTomorrow = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleTomorrow, $body, PinIcon::NEWS_EVENT);            
+                $pinlayoutDayAfter = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleDayAfter, $body, PinIcon::NEWS_EVENT);            
+                $pinTomorrow = new Pin($idTomorrow, $newsTimeTomorrow, $pinlayout);
+                $pinDayAfter = new Pin($idDayAfter, $newsTimeDayAfter, $pinlayout);
+            }
             
 	    // $userToken = "SBJi6DLASS1gawIXru2tiBqAf8HohY5G";
             // $apiKey = "SBffgcwkhl939ur2fjynentgjexjne0t";
