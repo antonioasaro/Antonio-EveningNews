@@ -55,7 +55,7 @@ and open the template in the editor.
                 	$description = \strip_tags($xml->channel->item[$i]->description, '<br>');
                 	$content = explode("<br>", $description);
                 	$fixed = str_replace($search, $replace, $content[2]);
-                	$body .= "$i: $fixed\n ";
+                	$body .= "$i: $fixed\n";
             	}        
 	    }
             $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitle, $body, PinIcon::NEWS_EVENT);            
