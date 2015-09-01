@@ -9,6 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
     </head>
+
     <body>
         <?php   
             require_once './TimelineAPI/Timeline.php';
