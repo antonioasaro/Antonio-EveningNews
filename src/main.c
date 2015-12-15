@@ -9,14 +9,22 @@ void handle_init(void) {
   window_set_background_color(my_window, GColorVividCerulean);  
   window_stack_push(my_window, true);
 
+#ifdef PBL_ROUND  
+  title_text_layer = text_layer_create(GRect(20, 55, 144, 40));
+#else	
   title_text_layer = text_layer_create(GRect(0, 50, 144, 40));
+#endif
   text_layer_set_font(title_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
   text_layer_set_text_alignment(title_text_layer, GTextAlignmentCenter);
   text_layer_set_text_color(title_text_layer, GColorBlack);	
   text_layer_set_text(title_text_layer, "Subscribed!!");
   layer_add_child(window_get_root_layer(my_window), text_layer_get_layer(title_text_layer));	
 
+#ifdef PBL_ROUND	
+  body_text_layer = text_layer_create(GRect(20, 85, 144, 40));
+#else	
   body_text_layer = text_layer_create(GRect(0, 80, 144, 40));
+#endif
   text_layer_set_font(body_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   text_layer_set_text_alignment(body_text_layer, GTextAlignmentCenter);
   text_layer_set_text_color(body_text_layer, GColorBlack);	
