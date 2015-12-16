@@ -12,10 +12,11 @@
     "sdkVersion": "3",
     "shortName": "EveningNews",
     "targetPlatforms": [
-        "basalt"
+        "basalt",
+        "chalk"
     ],
     "uuid": "2cb3f2bc-f51d-4658-bd2e-8b526605f2fd",
-    "versionLabel": "1.16",
+    "versionLabel": "2.0",
     "watchapp": {
         "watchface": false
     }
