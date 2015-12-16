@@ -58,13 +58,13 @@ and open the template in the editor.
                 	$body .= "$i: $fixed\n";
             	}        
 	    }
-            $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitle, $body, PinIcon::NEWS_EVENT);            
+            $pinlayout = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitle, $body, PinIcon::NEWS_EVENT, null, null, null, '#00FFFF');   
             $pin = new Pin($id, $newsTime, $pinlayout);
   
             $reminderTime = new DateTime('now', $amny);
             $reminderTime->setTime(18, 25, 0);
             $reminderTime->setTimeZone($utc);
-            $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'EveningNews reminder!!', null, null, null, PinIcon::NOTIFICATION_FLAG);
+            $reminderlayout = new PinLayout(PinLayoutType::GENERIC_REMINDER, 'EveningNews reminder!!', null, null, null, PinIcon::NOTIFICATION_FLAG, null, null, null, '#00FFFF');
             $reminder = new PinReminder($reminderlayout, $reminderTime);
             $pin -> addReminder($reminder);
 
@@ -75,8 +75,8 @@ and open the template in the editor.
                 $idDayAfter = "antonio-eveningnews-shared-" . $newsTimeDayAfter->format('Y-m-d');
                 $subtitleTomorrow = $newsTimeTomorrow->format('m/d') . " headlines";
                 $subtitleDayAfter = $newsTimeDayAfter->format('m/d') . " headlines";
-                $pinlayoutTomorrow = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleTomorrow, $body, PinIcon::NEWS_EVENT);            
-                $pinlayoutDayAfter = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleDayAfter, $body, PinIcon::NEWS_EVENT);            
+                $pinlayoutTomorrow = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleTomorrow, $body, PinIcon::NEWS_EVENT, null, null, null, '#00FFFF');            
+                $pinlayoutDayAfter = new PinLayout(PinLayoutType::GENERIC_PIN, 'EveningNews', null, $subtitleDayAfter, $body, PinIcon::NEWS_EVENT, null, null, null, '#00FFFF');            
                 $pinTomorrow = new Pin($idTomorrow, $newsTimeTomorrow, $pinlayoutTomorrow);
                 $pinDayAfter = new Pin($idDayAfter, $newsTimeDayAfter, $pinlayoutDayAfter);
             }
